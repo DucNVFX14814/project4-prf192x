@@ -32,7 +32,7 @@ function searchModal() {
 getDataFromAPI();
 //hàm lấy data từ API Gnews, có thêm &lang=en và &topic=sports
 function getDataFromAPI() {
-    fetch('https://gnews.io/api/v4/top-headlines?&token=a0ad43783131a887c2dd411a6793be22&lang=en&topic=sports')
+    fetch('https://gnews.io/api/v4/top-headlines?&token=d972f12e521225081a3344bb16524d13&lang=en&topic=sports')
         .then(function(response) {
             return response.json();
         })
@@ -83,7 +83,7 @@ searchBtn.onclick = function() {
 
     //khai báo biến url để đưa vào fetch()
     let url = `https://gnews.io/api/v4/search?`;
-    const tokenAPI = `&token=a0ad43783131a887c2dd411a6793be22&lang=en&topic=sports`;
+    const tokenAPI = `&token=d972f12e521225081a3344bb16524d13&lang=en&topic=sports`;
     //kiểm tra điều kiện, keywords là bắt buộc, nếu không sẽ trả về q là mặc định
     if (keywords == "") {
         url += `q=example`;
