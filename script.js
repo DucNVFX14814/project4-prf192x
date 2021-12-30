@@ -5,7 +5,7 @@ var listArticle = document.getElementById("listArticle");
 var searchBtn = document.getElementById("searchBtn");
 
 searchModal();
-//tạo hàm khi click vào iconSearch sẽ hiện ra modal có input và button để tìm kiếm, lọc thông tin
+//tạo hàm khi click vào .iconSearch sẽ hiện ra modal có input và button để tìm kiếm, lọc thông tin
 function searchModal() {
     //tạo các biến theo các id và class tương ứng
     var modal = document.getElementById("myModal");
@@ -31,7 +31,7 @@ function searchModal() {
 getDataFromAPI();
 //hàm lấy data từ API Gnews, có thêm &lang=en và &topic=sports
 function getDataFromAPI() {
-    fetch('https://gnews.io/api/v4/top-headlines?token=d972f12e521225081a3344bb16524d13&lang=en&topic=sports')
+    fetch('https://gnews.io/api/v4/top-headlines?token=78b21f192c057878013b5a493eaec0ed&lang=en&topic=sports')
         .then(function(response) {
             return response.json();
         })
@@ -39,12 +39,14 @@ function getDataFromAPI() {
 
             //thêm vào #listArticle 1 đoạn HTML khi trang đang được tải
             listArticle.innerHTML = `<div class="loading">Loading...<div>`;
+
             //setTimeout, ban đầu trang sẽ hiện Loading... như ở trên, sau 1200ms thì thêm vào #listArticle 1 đoạn HTML như kia, đó sẽ là danh sách các Article mà ta muốn hiển thị
             setTimeout(function() {
                 //clear #listArticle
                 listArticle.innerHTML = "";
                 //khởi tạo biến myArticle là phần articles trong data lấy được từ API
                 const myArticle = data.articles;
+
                 //lặp qua các phần tử của myArticle
                 for (let i = 0; i < myArticle.length; i++) {
                     //tạo <article> và gán vào biến divArticle
@@ -61,7 +63,7 @@ function getDataFromAPI() {
                            <div class="time">${myArticle[i].publishedAt}</div>
                            <p class="decription">${myArticle[i].description}</p>
                        </div>
-                    <hr>
+                       <hr>
                     `;
                     //thêm mỗi divArticle vào #listArticle tạo thành danh sách các Article
                     listArticle.appendChild(divArticle);
@@ -69,7 +71,6 @@ function getDataFromAPI() {
                     document.getElementById("footer").style.display = "block";
                 };
             }, 1200);
-
         });
 }
 
@@ -81,23 +82,25 @@ searchBtn.onclick = function() {
     const dateTo = document.getElementById("inputDateToSearch").value;
 
     //khai báo biến url để đưa vào fetch()
-    let url = `https://gnews.io/api/v4/search?`;
-    const tokenAPI = `&token=d972f12e521225081a3344bb16524d13&lang=en&topic=sports`;
-    //kiểm tra điều kiện, nếu keywords có giá trị thì sẽ thêm q tương ứng vào url, còn không sẽ trả về q mặc định là sports
-    if (keywords == "") {
-        url += `q=sports`;
+    let url = `https://gnews.io/api/v4/`;
+    //khai báo tokenAPI, đã có gắn thêm &lang=en và &topic=sports
+    const tokenAPI = `&token=78b21f192c057878013b5a493eaec0ed&lang=en&topic=sports`;
+    // d972f12e521225081a3344bb16524d13
+    // 78b21f192c057878013b5a493eaec0ed
+    //kiểm tra điều kiện, nếu keywords có giá trị thì sẽ thêm search? và q tương ứng vào url, còn không sẽ chỉ thêm top-headlines? vào url
+    if (keywords.trim() == "") {
+        url += `top-headlines?`;
     } else {
-        url += `q=${keywords}`;
+        url += `search?q=${keywords.trim()}`;
 
     }
     //tương tự, nếu dateFrom hay dateTo có giá trị thì sẽ thêm từ khóa tương ứng vào url
     if (dateFrom != "") {
-        //chuyển sang chuẩn định dạng ISO 8601
+        //chuyển sang chuẩn định dạng ISO 8601. ! Lưu ý, input phải nhập chuẩn dạng yyyy-mm-dd
         const keyDateFrom = dateFrom + "T00:00:00Z";
         url += `&from=${keyDateFrom}`;
     }
     if (dateTo != "") {
-        //chuyển sang chuẩn định dạng ISO 8601
         const keyDateTo = dateTo + "T00:00:00Z";
         url += `&to=${keyDateTo}`;
     }
@@ -108,13 +111,15 @@ searchBtn.onclick = function() {
             return response.json();
         })
         .then(function(data) {
-
+            // console.log(data);
             //ẩn footer
             document.getElementById("footer").style.display = "none";
             listArticle.innerHTML = `<div class="loading">Loading...<div>`;
+
             setTimeout(function() {
                 listArticle.innerHTML = "";
                 const myArticle = data.articles;
+
                 for (let i = 0; i < myArticle.length; i++) {
                     const divArticle = document.createElement("article");
                     divArticle.innerHTML = `
