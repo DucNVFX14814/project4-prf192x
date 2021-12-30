@@ -1,0 +1,165 @@
+* {
+    box-sizing: border-box;
+}
+
+nav {
+    height: 50px;
+    background-color: red;
+    text-align: center;
+    text-shadow: 4px 2px 3px #000000;
+}
+
+.iconSearch {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+.loading {
+    margin-top: 80px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+
+/* The Modal (background) */
+
+.modal {
+    display: none;
+    z-index: 1;
+    padding-top: 110px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: inset 5px -4px 20px 3px #000000;
+}
+
+
+/* Modal Content */
+
+.modal-content {
+    background-color: #e0d0d0;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 95%;
+    position: relative;
+    box-shadow: 5px 6px 8px 0px #000000;
+}
+
+.modal-content .input-search input::placeholder {
+    text-align: center;
+}
+
+
+/* The Close Button */
+
+.close {
+    display: block;
+    width: 20px;
+    height: 10px;
+    position: absolute;
+    top: 1%;
+    right: 2%;
+    color: red;
+    font-size: 32px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+section h2 {
+    text-align: center;
+    padding: 10px;
+    background-color: rgb(233, 242, 250);
+}
+
+#listArticle {
+    background-color: aliceblue;
+    margin: -20px 0px;
+}
+
+#listArticle article {
+    margin: 20px;
+    align-items: center;
+}
+
+#listArticle article:first-child {
+    padding-top: 36px;
+}
+
+#listArticle article::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#listArticle .content h3 {
+    font-size: 22px;
+}
+
+#listArticle .content .time {
+    font-size: 14px;
+}
+
+#listArticle .content .decription {
+    font-size: 14px;
+}
+
+footer {
+    display: none;
+}
+
+footer div div {
+    border-bottom: 2px solid red;
+}
+
+
+/* for mobile */
+
+@media only screen and (max-width: 767px) {
+    .modal-content .input-search {
+        padding: 16px 0px;
+    }
+    .modal-content .input-search input::placeholder {
+        font-size: 10px;
+    }
+    #listArticle .img {
+        width: 320px;
+        height: auto;
+        display: block;
+        margin: 0 auto 10px auto;
+    }
+}
+
+
+/* for tablet, desktop */
+
+@media only screen and (min-width: 768px) {
+    .modal-content {
+        width: 80%;
+    }
+    .modal-content .input-search {
+        padding: 25px 10%;
+    }
+    #listArticle .img {
+        float: left;
+        width: 240px;
+        height: 180px;
+        margin-right: 20px;
+    }
+    #listArticle .content {
+        width: auto;
+        height: 180px;
+        overflow: hidden;
+    }
+}
