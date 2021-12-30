@@ -3,7 +3,7 @@
 }
 
 nav {
-    height: 50px;
+    height: 60px;
     background-color: red;
     text-align: center;
     text-shadow: 4px 2px 3px #000000;
@@ -131,7 +131,7 @@ footer div div {
         padding: 16px 0px;
     }
     .modal-content .input-search input::placeholder {
-        font-size: 10px;
+        font-size: 9px;
     }
     #listArticle .img {
         width: 320px;
