@@ -1,5 +1,4 @@
 //bài làm có tham khảo trên youtube, gr discord, mentor
-//cái phần search &from &to đã hỏi mentor rất kĩ nhưng kết quả trả về không như mong đợi, vẫn chỉ trả về theo thời gian mới nhất, còn phần &q thì hoạt động bình thường. Mentor nói là có thể do API lỗi
 
 //khai báo các biến với các element có id tương ứng
 var listArticle = document.getElementById("listArticle");
@@ -32,7 +31,7 @@ function searchModal() {
 getDataFromAPI();
 //hàm lấy data từ API Gnews, có thêm &lang=en và &topic=sports
 function getDataFromAPI() {
-    fetch('https://gnews.io/api/v4/top-headlines?&token=d972f12e521225081a3344bb16524d13&lang=en&topic=sports')
+    fetch('https://gnews.io/api/v4/top-headlines?token=d972f12e521225081a3344bb16524d13&lang=en&topic=sports')
         .then(function(response) {
             return response.json();
         })
@@ -84,23 +83,23 @@ searchBtn.onclick = function() {
     //khai báo biến url để đưa vào fetch()
     let url = `https://gnews.io/api/v4/search?`;
     const tokenAPI = `&token=d972f12e521225081a3344bb16524d13&lang=en&topic=sports`;
-    //kiểm tra điều kiện, keywords là bắt buộc, nếu không sẽ trả về q là mặc định
+    //kiểm tra điều kiện, nếu keywords có giá trị thì sẽ thêm q tương ứng vào url, còn không sẽ trả về q mặc định là sports
     if (keywords == "") {
-        url += `q=example`;
-        //nếu keywords có giá trị, thì thêm vào url các giá trị tương ứng, với những điều kiện tương ứng của dateFrom và dateTo
+        url += `q=sports`;
     } else {
         url += `q=${keywords}`;
 
-        if (dateFrom != "") {
-            //chuyển sang chuẩn định dạng ISO
-            const keyDateFrom = (new Date(dateFrom)).toISOString();
-            url += `&from=${keyDateFrom}`;
-        }
-        if (dateTo != "") {
-            //chuyển sang chuẩn định dạng ISO
-            const keyDateTo = (new Date(dateTo)).toISOString();
-            url += `&to=${keyDateTo}`;
-        }
+    }
+    //tương tự, nếu dateFrom hay dateTo có giá trị thì sẽ thêm từ khóa tương ứng vào url
+    if (dateFrom != "") {
+        //chuyển sang chuẩn định dạng ISO 8601
+        const keyDateFrom = dateFrom + "T00:00:00Z";
+        url += `&from=${keyDateFrom}`;
+    }
+    if (dateTo != "") {
+        //chuyển sang chuẩn định dạng ISO 8601
+        const keyDateTo = dateTo + "T00:00:00Z";
+        url += `&to=${keyDateTo}`;
     }
 
     //lấy dữ liệu từ API Gnews với các từ khóa thông tin tìm kiếm, các bước tương tự như ở trên đã giải thích
