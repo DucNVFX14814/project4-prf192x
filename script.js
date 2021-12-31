@@ -31,7 +31,7 @@ function searchModal() {
 getDataFromAPI();
 //hàm lấy data từ API Gnews, có thêm &lang=en và &topic=sports
 function getDataFromAPI() {
-    fetch('https://gnews.io/api/v4/top-headlines?token=78b21f192c057878013b5a493eaec0ed&lang=en&topic=sports')
+    fetch('https://gnews.io/api/v4/top-headlines?token=a0ad43783131a887c2dd411a6793be22&lang=en&topic=sports')
         .then(function(response) {
             return response.json();
         })
@@ -84,9 +84,8 @@ searchBtn.onclick = function() {
     //khai báo biến url để đưa vào fetch()
     let url = `https://gnews.io/api/v4/`;
     //khai báo tokenAPI, đã có gắn thêm &lang=en và &topic=sports
-    const tokenAPI = `&token=78b21f192c057878013b5a493eaec0ed&lang=en&topic=sports`;
-    // d972f12e521225081a3344bb16524d13
-    // 78b21f192c057878013b5a493eaec0ed
+    const tokenAPI = `&token=a0ad43783131a887c2dd411a6793be22&lang=en&topic=sports`;
+
     //kiểm tra điều kiện, nếu keywords có giá trị thì sẽ thêm search? và q tương ứng vào url, còn không sẽ chỉ thêm top-headlines? vào url
     if (keywords.trim() == "") {
         url += `top-headlines?`;
